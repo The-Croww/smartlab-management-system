@@ -1,2 +1,2 @@
-# smartlab-management-system
+# SmartLab
 Laboratory management system for scheduling and equipment borrowing
