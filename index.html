@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Lab</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<nav>
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#about">About Smart Lab</a>
+    <a href="#login" class="loginBtn">Login</a>
+</nav>
+</header>
+
+<!-- HOME -->
+<section id="home">
+<h1>Smart Lab</h1>
+<p>Laboratory scheduling and equipment borrowing system for students, faculty, and administrators.</p>
+
+<div class="card">
+    <strong>Getting Started</strong>
+    <p>Click the Login button above to access your Smart Lab panel.</p>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+<h2>Features</h2>
+<div class="card">
+<ul>
+    <li>Student equipment borrowing</li>
+    <li>Faculty lab room requests</li>
+    <li>Admin approval and monitoring</li>
+</ul>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>About Smart Lab</h2>
+<div class="card">
+<p>
+Smart Lab streamlines laboratory usage by managing schedules, requests, and approvals
+in one centralized system. This section can be expanded later.
+</p>
+</div>
+</section>
+
+<!-- LOGIN SECTION -->
+<section id="login">
+<h2>Login</h2>
+
+<div class="card loginBox">
+<p><strong>Sample Accounts (Demo)</strong></p>
+<p>
+Student: student@smartlab.com / student123<br>
+Faculty: faculty@smartlab.com / faculty123<br>
+Admin: admin@smartlab.com / admin123
+</p>
+
+<form id="loginForm">
+    <label>Email</label>
+    <input type="email" id="email" required>
+
+    <label>Password</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Sign In</button>
+    <div class="error" id="errorMsg">Invalid login credentials.</div>
+</form>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+Footer placeholder — edit later
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

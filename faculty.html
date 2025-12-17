@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Lab - Faculty Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <strong>Faculty Panel</strong>
+  <span id="who"></span>
+  <div class="spacer"></div>
+  <button class="btn btnDanger" id="logoutBtn">Logout</button>
+</header>
+
+<main>
+  <!-- First thing shown: the request form (no dashboard) -->
+  <div class="card">
+    <div class="cardHeader">
+      <h3>Borrow / Room Request Form</h3>
+      <button class="btn" id="viewScheduleBtn" disabled>View Schedule</button>
+    </div>
+
+    <p class="note">
+      <strong>Note:</strong> REQUESTS / RESERVATIONS must be filed at least three (3) working days
+      before the date and time needed.
+    </p>
+
+    <form id="facultyRequestForm" class="row">
+      <!-- Request filed -->
+      <div>
+        <label>Date (Request Filed)</label>
+        <input type="date" name="requestDate" required>
+      </div>
+
+      <div>
+        <label>Time (Request Filed)</label>
+        <input type="time" name="requestTime" required>
+      </div>
+
+      <!-- Particulars -->
+      <div class="full">
+        <label>Particular/s</label>
+
+        <div class="checkgrid">
+          <!-- Added Laboratory Room/s -->
+          <label><input type="checkbox" id="labChk" name="particulars" value="Laboratory Room/s"> Laboratory Room/s</label>
+
+          <div class="labSelectWrap full" id="labSelectWrap" style="display:none;">
+            <label class="muted small">Select Laboratory Room</label>
+            <select id="labSelect" name="labRoom">
+              <option value="">-- Select Lab --</option>
+              <option value="Lab 1">Lab 1</option>
+              <option value="Lab 2">Lab 2</option>
+              <option value="Lab 3">Lab 3</option>
+            </select>
+            <p class="muted small margin-bottom-zero">
+              Pick a lab to enable “View Schedule”.
+            </p>
+          </div>
+
+          <label><input type="checkbox" name="particulars" value="LCD/LED TV"> LCD/LED TV</label>
+          <label><input type="checkbox" name="particulars" value="VGA/HDMI port"> VGA/HDMI port</label>
+          <label><input type="checkbox" name="particulars" value="Extension Cords"> Extension Cords</label>
+          <label><input type="checkbox" name="particulars" value="Projectors"> Projectors</label>
+          <label><input type="checkbox" name="particulars" value="Crimping tool"> Crimping tool</label>
+
+          <label class="full">
+            <input type="checkbox" id="partOthersChk"> Others:
+            <input type="text" id="partOthersTxt" placeholder="Specify..." disabled>
+          </label>
+        </div>
+      </div>
+
+      <!-- Faculty info -->
+      <div>
+        <label>Faculty in charge</label>
+        <input type="text" name="facultyInCharge" required>
+      </div>
+
+      <div>
+        <label>Subject</label>
+        <input type="text" name="subject" required>
+      </div>
+
+      <div>
+        <label>Course / Year / Section</label>
+        <input type="text" name="courseYearSection" required>
+      </div>
+
+      <!-- Use details -->
+      <div>
+        <label>Date of Use</label>
+        <input type="date" name="dateOfUse" required>
+      </div>
+
+      <div>
+        <label>Room / Location</label>
+        <input type="text" name="roomLocation" placeholder="If Lab selected above, you can still specify room details here." required>
+      </div>
+
+      <div>
+        <label>Time of Use</label>
+        <input type="time" name="timeOfUse" required>
+      </div>
+
+      <div>
+        <label>Contact Details</label>
+        <input type="text" name="contactDetails" required>
+      </div>
+
+      <!-- Purpose -->
+      <div class="full">
+        <label>Purpose</label>
+
+        <div class="checkgrid">
+          <label><input type="radio" name="purpose" value="Oral Defence/Presentation" required> Oral Defence / Presentation</label>
+          <label><input type="radio" name="purpose" value="General Assembly"> General Assembly</label>
+          <label><input type="radio" name="purpose" value="Seminar"> Seminar</label>
+          <label><input type="radio" name="purpose" value="Tutorial"> Tutorial</label>
+          <label><input type="radio" name="purpose" value="Make-up class"> Make-up class</label>
+          <label><input type="radio" name="purpose" value="Class presentation"> Class presentation</label>
+          <label><input type="radio" name="purpose" value="Class activity"> Class activity</label>
+
+          <label class="full">
+            <input type="radio" id="purposeOthersRad" name="purpose" value="Others">
+            Others:
+            <input type="text" id="purposeOthersTxt" placeholder="Specify..." disabled>
+          </label>
+        </div>
+      </div>
+
+      <!-- Requested by -->
+      <div>
+        <label>Requested by (Name)</label>
+        <input type="text" name="requestedByName" required>
+      </div>
+
+      <div>
+        <label>Requested by (Date)</label>
+        <input type="date" name="requestedByDate" required>
+      </div>
+
+      <div class="actions full">
+        <button type="button" class="btn" id="newRequestBtn">Request New</button>
+        <button type="button" class="btn btnDanger" id="cancelBtn">Cancel</button>
+        <button type="submit" class="btn btnPrimary">Submit Request</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Schedule area (hidden until lab selected + user clicks view schedule) -->
+  <div class="card hidden" id="scheduleCard">
+    <div class="cardHeader">
+      <h3 id="scheduleTitle">Lab Schedule</h3>
+      <button class="btn" id="hideScheduleBtn">Hide</button>
+    </div>
+
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Faculty</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody">
+          <!-- injected -->
+        </tbody>
+      </table>
+    </div>
+
+    <p class="muted small margin-bottom-zero">
+      Mock schedule view. Later, load schedules from your database filtered by Lab.
+    </p>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Lab - Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <strong>Admin Panel</strong>
+  <span id="who"></span>
+  <div class="spacer"></div>
+  <button class="btn btnDanger" id="logoutBtn">Logout</button>
+</header>
+
+<main class="adminShell">
+  <!-- Sidebar / Nav -->
+  <aside class="sidebar card">
+    <h3 class="sidebarTitle">Navigation</h3>
+
+    <nav class="navList">
+      <button class="navItem active" data-tab="users">Manage Users Account</button>
+      <button class="navItem" data-tab="schedule">Manage Lab Schedule</button>
+      <button class="navItem" data-tab="requests">View Requests</button>
+      <button class="navItem" data-tab="equipment">Manage Equipments</button>
+      <button class="navItem" data-tab="reports">Reports</button>
+    </nav>
+
+    <p class="muted small">
+      Mock UI only. Connect these actions to your database and token/session checks later.
+    </p>
+  </aside>
+
+  <!-- Content -->
+  <section class="content">
+
+    <!-- Manage Users -->
+    <div class="card tabPanel" id="tab-users">
+      <div class="cardHeader">
+        <h3>Manage Users Account</h3>
+        <button class="btn btnPrimary" id="addAccountBtn">Add Account</button>
+      </div>
+
+      <p class="muted">
+        Shows all accounts that have a token/access to use the website (mock list below).
+      </p>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Name</th>
+              <th>Email / Username</th>
+              <th>Token</th>
+              <th>Status</th>
+              <th style="width:160px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr>
+              <td>Faculty</td>
+              <td>Juan Dela Cruz</td>
+              <td>faculty@smartlab.com</td>
+              <td><span class="pill">Has Token</span></td>
+              <td>Active</td>
+              <td>
+                <button class="btn btnSmall" data-action="editUser">Edit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Student</td>
+              <td>Maria Santos</td>
+              <td>student@smartlab.com</td>
+              <td><span class="pill">Has Token</span></td>
+              <td>Active</td>
+              <td>
+                <button class="btn btnSmall" data-action="editUser">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Manage Lab Schedule -->
+    <div class="card tabPanel hidden" id="tab-schedule">
+      <div class="cardHeader">
+        <h3>Manage Lab Schedule</h3>
+        <button class="btn btnPrimary" id="addScheduleBtn">Add Schedule</button>
+      </div>
+
+      <p class="muted">Create, edit, and delete schedules for Lab 1, Lab 2, Lab 3.</p>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Lab</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Faculty</th>
+              <th>Purpose</th>
+              <th style="width:200px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleTableBody">
+            <tr>
+              <td>Lab 1</td>
+              <td>2025-12-20</td>
+              <td>09:00 - 11:00</td>
+              <td>Prof. Reyes</td>
+              <td>Lecture</td>
+              <td>
+                <button class="btn btnSmall" data-action="editSchedule">Edit</button>
+                <button class="btn btnSmall btnDanger" data-action="deleteSchedule">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Lab 2</td>
+              <td>2025-12-21</td>
+              <td>13:00 - 15:00</td>
+              <td>Prof. Dizon</td>
+              <td>Exam</td>
+              <td>
+                <button class="btn btnSmall" data-action="editSchedule">Edit</button>
+                <button class="btn btnSmall btnDanger" data-action="deleteSchedule">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- View Requests -->
+    <div class="card tabPanel hidden" id="tab-requests">
+      <h3>View Requests</h3>
+      <p class="muted">
+        Pending requests are separated and organized: Room Requests and Equipment Requests.
+      </p>
+
+      <div class="split">
+        <div class="card innerCard">
+          <div class="cardHeader">
+            <h4>Room Requests (Pending)</h4>
+            <span class="pill">Mock</span>
+          </div>
+
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Requested By</th>
+                  <th>Lab</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th style="width:220px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="roomReqBody">
+                <tr>
+                  <td>faculty@smartlab.com</td>
+                  <td>Lab 1</td>
+                  <td>2025-12-21</td>
+                  <td>13:00 - 15:00</td>
+                  <td>
+                    <button class="btn btnSmall btnPrimary" data-action="approveRoom">Approve</button>
+                    <button class="btn btnSmall btnDanger" data-action="rejectRoom">Reject</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card innerCard">
+          <div class="cardHeader">
+            <h4>Equipment Requests (Pending)</h4>
+            <span class="pill">Mock</span>
+          </div>
+
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Requested By</th>
+                  <th>Equipment</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th style="width:220px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="equipReqBody">
+                <tr>
+                  <td>student@smartlab.com</td>
+                  <td>Projector</td>
+                  <td>2025-12-20</td>
+                  <td>09:00 - 11:00</td>
+                  <td>
+                    <button class="btn btnSmall btnPrimary" data-action="approveEquip">Approve</button>
+                    <button class="btn btnSmall btnDanger" data-action="rejectEquip">Reject</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manage Equipments -->
+    <div class="card tabPanel hidden" id="tab-equipment">
+      <div class="cardHeader">
+        <h3>Manage Equipments</h3>
+        <button class="btn btnPrimary" id="addEquipmentBtn">Add Equipment</button>
+      </div>
+
+      <p class="muted">
+        Equipment list here should be shared across Student/Faculty panels (so they can select from the same items).
+      </p>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Equipment Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th style="width:200px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="equipTableBody">
+            <tr>
+              <td>Projector</td>
+              <td>AV</td>
+              <td>4</td>
+              <td>Available</td>
+              <td>
+                <button class="btn btnSmall" data-action="editEquipment">Edit</button>
+                <button class="btn btnSmall btnDanger" data-action="deleteEquipment">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Extension Cord</td>
+              <td>Accessories</td>
+              <td>10</td>
+              <td>Available</td>
+              <td>
+                <button class="btn btnSmall" data-action="editEquipment">Edit</button>
+                <button class="btn btnSmall btnDanger" data-action="deleteEquipment">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reports -->
+    <div class="card tabPanel hidden" id="tab-reports">
+      <div class="cardHeader">
+        <h3>Reports</h3>
+        <button class="btn btnPrimary" id="printReportsBtn">Print Reports</button>
+      </div>
+
+      <p class="muted">
+        Prints the full history: borrower, what they borrowed, and time/date. This table is a mock view of that log.
+      </p>
+
+      <div class="tableWrap">
+        <table id="reportsTable">
+          <thead>
+            <tr>
+              <th>Borrower</th>
+              <th>Role</th>
+              <th>Item/Room</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="reportsBody">
+            <tr>
+              <td>student@smartlab.com</td>
+              <td>Student</td>
+              <td>Projector</td>
+              <td>Equipment</td>
+              <td>2025-12-20</td>
+              <td>09:00 - 11:00</td>
+              <td>Approved</td>
+            </tr>
+            <tr>
+              <td>faculty@smartlab.com</td>
+              <td>Faculty</td>
+              <td>Lab 1</td>
+              <td>Room</td>
+              <td>2025-12-21</td>
+              <td>13:00 - 15:00</td>
+              <td>Approved</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
